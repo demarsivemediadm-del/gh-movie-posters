@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GH Movie Posters – Authentic Ghanaian Hand-Painted Cinema Art</title>
+  <meta name="description" content="Shop authentic hand-painted Ghanaian movie posters. Original African cinema art — available as digital downloads and physical prints. Ships worldwide." />
+  <meta name="keywords" content="Ghanaian movie posters, Ghana hand-painted posters, African movie art, Ghana cinema posters, Kantanka art, African film posters" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0805;
+      --bg2: #120f09;
+      --bg3: #1a1510;
+      --gold: #c9902a;
+      --gold-light: #e8b84b;
+      --gold-pale: #f5d88a;
+      --red: #c0392b;
+      --cream: #f2e8d5;
+      --text: #e8ddc8;
+      --text-dim: #8a7d68;
+      --border: rgba(201,144,42,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      background: linear-gradient(to bottom, rgba(10,8,5,0.95), transparent);
+      backdrop-filter: blur(4px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.12em;
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--cream); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold-light); }
+
+    .nav-cart {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--gold);
+      color: #0a0805;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.1rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .nav-cart:hover { background: var(--gold-light); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 4rem 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 7vw, 6.5rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold-light);
+      display: block;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-dim);
+      max-width: 380px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #0a0805;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold-light); }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 0.2rem;
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-poster-grid {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 3px;
+    }
+
+    .poster-cell {
+      background: var(--bg3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poster-cell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,144,42,0.08), transparent);
+    }
+
+    .poster-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      opacity: 0.3;
+    }
+
+    .poster-placeholder svg {
+      width: 2rem;
+      height: 2rem;
+      opacity: 0.5;
+    }
+
+    .poster-placeholder span {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* poster color blocks mimicking hand-painted style */
+    .pc-1 { background: linear-gradient(160deg, #3d1a0a 0%, #6b2d12 40%, #1a0d05 100%); }
+    .pc-2 { background: linear-gradient(200deg, #0d1f0d 0%, #1a3d1a 50%, #0a1208 100%); }
+    .pc-3 { background: linear-gradient(140deg, #1a1208 0%, #3d2d0a 60%, #0d0d05 100%); }
+    .pc-4 { background: linear-gradient(180deg, #0d0d1f 0%, #1a1a3d 50%, #080812 100%); }
+    .pc-5 { background: linear-gradient(170deg, #1f0d0d 0%, #3d1212 50%, #120808 100%); }
+    .pc-6 { background: linear-gradient(150deg, #1a0d1a 0%, #3d1a3d 50%, #120812 100%); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--gold);
+      overflow: hidden;
+      padding: 0.7rem 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-track span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      color: #0a0805;
+      padding: 0 2rem;
+    }
+
+    .marquee-track .dot {
+      color: rgba(10,8,5,0.4);
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 6rem 0; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--cream);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1;
+      color: var(--cream);
+    }
+
+    .about-title em {
+      font-style: normal;
+      color: var(--gold-light);
+    }
+
+    .about-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-dim);
+    }
+
+    .about-body strong { color: var(--text); font-weight: 500; }
+
+    /* ── SHOP SECTION ── */
+    .shop { background: var(--bg); }
+
+    .shop-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .filter-tab {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-tab.active,
+    .filter-tab:hover {
+      background: var(--gold);
+      color: #0a0805;
+      border-color: var(--gold);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5px;
+    }
+
+    .product-card {
+      background: var(--bg2);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .product-card:hover { transform: scale(1.01); z-index: 2; }
+    .product-card:hover .product-overlay { opacity: 1; }
+    .product-card:hover .product-img-wrap img { transform: scale(1.06); }
+
+    .product-img-wrap {
+      aspect-ratio: 2/3;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg3);
+    }
+
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    /* Placeholder poster art */
+    .product-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.15em;
+      color: rgba(201,144,42,0.3);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .product-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,8,5,0.75);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .overlay-btn {
+      background: var(--gold);
+      color: #0a0805;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      cursor: pointer;
+      width: 70%;
+      transition: background 0.2s;
+    }
+
+    .overlay-btn:hover { background: var(--gold-light); }
+
+    .overlay-btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--text);
+    }
+
+    .overlay-btn.secondary:hover { border-color: var(--gold); color: var(--gold-light); }
+
+    .product-info {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+
+    .product-badge {
+      display: inline-block;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge-digital { background: rgba(201,144,42,0.15); color: var(--gold); }
+    .badge-physical { background: rgba(192,57,43,0.15); color: #e74c3c; }
+    .badge-both { background: rgba(255,255,255,0.08); color: var(--text-dim); }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+
+    .product-origin {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+    }
+
+    .product-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+    }
+
+    .product-price-digital {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      display: block;
+    }
+
+    .add-btn {
+      width: 2rem;
+      height: 2rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .add-btn:hover { background: var(--gold); color: #0a0805; }
+
+    /* ── HOW IT WORKS ── */
+    .how { background: var(--bg2); border-top: 1px solid var(--border); }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 3rem;
+    }
+
+    .how-step {
+      background: var(--bg3);
+      padding: 2rem 1.5rem;
+      position: relative;
+    }
+
+    .how-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: rgba(201,144,42,0.1);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .how-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .how-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+
+    .how-desc {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text-dim);
+    }
+
+    /* ── FORMATS ── */
+    .formats { background: var(--bg); }
+
+    .format-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 3rem;
+    }
+
+    .format-card {
+      background: var(--bg2);
+      padding: 3rem;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .format-card:hover { border-color: var(--gold); }
+
+    .format-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .format-card:hover::before { transform: scaleX(1); }
+
+    .format-icon { font-size: 2.5rem; margin-bottom: 1.2rem; }
+
+    .format-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--cream);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+    }
+
+    .format-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    .format-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .format-features li {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .format-features li::before {
+      content: '→';
+      color: var(--gold);
+      font-size: 0.75rem;
+    }
+
+    .format-price {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .format-price-from {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    .format-price-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+
+    /* ── NEWSLETTER / ETSY CTA ── */
+    .cta-strip {
+      background: var(--gold);
+      padding: 4rem 0;
+    }
+
+    .cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .cta-text h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #0a0805;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .cta-text p {
+      font-size: 0.9rem;
+      color: rgba(10,8,5,0.6);
+      margin-top: 0.4rem;
+    }
+
+    .cta-actions { display: flex; gap: 1rem; flex-shrink: 0; }
+
+    .btn-dark {
+      background: #0a0805;
+      color: var(--gold-light);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.3s;
+    }
+
+    .btn-dark:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #060504;
+      border-top: 1px solid var(--border);
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--gold-light);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-brand-desc {
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: var(--text-dim);
+      max-width: 240px;
+    }
+
+    .footer-col-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--gold-light); }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .footer-powered {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .footer-powered a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ── CART SIDEBAR ── */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    .cart-sidebar {
+      position: fixed;
+      top: 0; right: 0;
+      width: 380px;
+      height: 100vh;
+      background: var(--bg2);
+      border-left: 1px solid var(--border);
+      z-index: 201;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-sidebar.open { transform: translateX(0); }
+
+    .cart-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      color: var(--cream);
+    }
+
+    .cart-close {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .cart-close:hover { color: var(--cream); }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 2rem;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 3rem 0;
+      color: var(--text-dim);
+    }
+
+    .cart-empty-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.3; }
+
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-item-art {
+      width: 60px;
+      height: 80px;
+      background: var(--bg3);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+
+    .cart-item-info { flex: 1; }
+
+    .cart-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: var(--cream);
+      margin-bottom: 0.2rem;
+    }
+
+    .cart-item-type {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+    }
+
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.8rem;
+      align-self: flex-start;
+      transition: color 0.2s;
+    }
+
+    .cart-item-remove:hover { color: #e74c3c; }
+
+    .cart-footer {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+    }
+
+    .cart-total-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    .cart-total-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--gold-light);
+    }
+
+    .checkout-note {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-align: center;
+      margin-top: 0.8rem;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(4rem);
+      background: var(--gold);
+      color: #0a0805;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.8rem 1.8rem;
+      z-index: 300;
+      transition: transform 0.3s;
+      pointer-events: none;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 7rem 1.5rem 3rem; }
+      .how-grid { grid-template-columns: 1fr 1fr; }
+      .format-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .cta-inner { flex-direction: column; text-align: center; }
+      .about-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .cart-sidebar { width: 100vw; }
+    }
+
+    @media (max-width: 600px) {
+      .how-grid { grid-template-columns: 1fr; }
+      .shop-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .filter-tabs { flex-wrap: wrap; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">GH<span> Movie Posters</span></a>
+    <ul class="nav-links">
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#formats">Formats</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-cart" onclick="toggleCart()">
+      🛒 Cart (<span id="cart-count">0</span>)
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-tag">Authentic Ghanaian Art</p>
+      <h1 class="hero-title">
+        Hand-Painted<br>
+        <em>Cinema Posters</em><br>
+        From Ghana
+      </h1>
+      <p class="hero-desc">
+        Raw. Vivid. Irreplaceable. Every poster is a one-of-a-kind hand-painted original from Ghana's legendary street cinema tradition — now available to the world.
+      </p>
+      <div class="hero-cta">
+        <a href="#shop" class="btn-primary">Shop the Collection</a>
+        <a href="#about" class="btn-secondary">Our Story</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Hand-Painted</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">GH</div>
+          <div class="hero-stat-label">Made in Ghana</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">🌍</div>
+          <div class="hero-stat-label">Ships Worldwide</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-poster-grid">
+        <div class="poster-cell pc-1"><div class="poster-placeholder"><span>Add Your Poster</span></div></div>
+        <div class="poster-cell pc-2"><div class="poster-placeholder"><span>Add Your Poster</span></div></div>
+        <div class="poster-cell pc-3"><div class="poster-placeholder"><span>Add Your Poster</span></div></div>
+        <div class="poster-cell pc-4"><div class="poster-placeholder"><span>Add Your Poster</span></div></div>
+        <div class="poster-cell pc-5"><div class="poster-placeholder"><span>Add Your Poster</span></div></div>
+        <div class="poster-cell pc-6"><div class="poster-placeholder"><span>Add Your Poster</span></div></div>
+      </div>
+      <div class="hero-overlay"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Hand-Painted Originals</span><span class="dot">✦</span>
+      <span>Digital Downloads Available</span><span class="dot">✦</span>
+      <span>Ships Worldwide</span><span class="dot">✦</span>
+      <span>Authentic Ghanaian Cinema Art</span><span class="dot">✦</span>
+      <span>As Featured on Last Week Tonight</span><span class="dot">✦</span>
+      <span>Hand-Painted Originals</span><span class="dot">✦</span>
+      <span>Digital Downloads Available</span><span class="dot">✦</span>
+      <span>Ships Worldwide</span><span class="dot">✦</span>
+      <span>Authentic Ghanaian Cinema Art</span><span class="dot">✦</span>
+      <span>As Featured on Last Week Tonight</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about-strip" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-title">
+          A Living<br><em>Art Form</em><br>From Ghana
+        </div>
+        <div class="about-body">
+          <p>Before digital printing, Ghanaian cinema owners hired local artists to hand-paint massive, dramatic posters to advertise their films. These painters — working with house paint on flour sacks — created something entirely their own: <strong>bold, expressive, visceral works</strong> that reimagined Hollywood blockbusters through a Ghanaian lens.</p>
+          <br>
+          <p>Today these posters are collected worldwide as <strong>genuine folk art</strong>. GH Movie Posters connects you directly to this tradition — sourcing authentic hand-painted pieces and high-quality reproductions from Ghanaian artists, available as <strong>digital downloads or physical originals</strong> shipped straight to your door.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section class="shop" id="shop">
+    <div class="container">
+      <div class="shop-header">
+        <div>
+          <p class="section-label">The Collection</p>
+          <h2 class="section-title">Shop All Posters</h2>
+        </div>
+        <div class="filter-tabs">
+          <button class="filter-tab active" onclick="filterProducts('all', this)">All</button>
+          <button class="filter-tab" onclick="filterProducts('digital', this)">Digital</button>
+          <button class="filter-tab" onclick="filterProducts('physical', this)">Physical</button>
+        </div>
+      </div>
+      <div class="product-grid" id="product-grid">
+        <!-- Products injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <div class="container">
+      <p class="section-label">Simple Process</p>
+      <h2 class="section-title">How It Works</h2>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-num">01</div>
+          <div class="how-icon">🎨</div>
+          <div class="how-title">Browse the Collection</div>
+          <div class="how-desc">Explore hand-painted originals and digital reproductions from Ghana's legendary cinema poster tradition.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">02</div>
+          <div class="how-icon">🛒</div>
+          <div class="how-title">Choose Your Format</div>
+          <div class="how-desc">Pick a high-res digital download for instant access, or order a physical print shipped from Ghana.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">03</div>
+          <div class="how-icon">💳</div>
+          <div class="how-title">Secure Checkout</div>
+          <div class="how-desc">Pay safely via PayPal or card. Your purchase directly supports Ghanaian artists.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">04</div>
+          <div class="how-icon">📦</div>
+          <div class="how-title">Receive Your Art</div>
+          <div class="how-desc">Digital orders: instant download. Physical orders: carefully packed and shipped worldwide within 5–10 days.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMATS -->
+  <section class="formats" id="formats">
+    <div class="container">
+      <p class="section-label">Available In</p>
+      <h2 class="section-title">Two Formats</h2>
+      <div class="format-grid">
+        <div class="format-card">
+          <div class="format-icon">⬇️</div>
+          <div class="format-title">Digital Download</div>
+          <div class="format-desc">High-resolution files delivered instantly after purchase. Print at home, at a local print shop, or frame it professionally.</div>
+          <ul class="format-features">
+            <li>Instant delivery after payment</li>
+            <li>300 DPI print-ready files</li>
+            <li>Multiple size options included</li>
+            <li>Print as many copies as you want</li>
+            <li>No shipping cost</li>
+          </ul>
+          <div class="format-price">
+            <div class="format-price-from">Starting from</div>
+            <div class="format-price-num">$5</div>
+          </div>
+        </div>
+        <div class="format-card">
+          <div class="format-icon">📦</div>
+          <div class="format-title">Physical Poster</div>
+          <div class="format-desc">The real thing — hand-painted original or gallery-quality print, carefully rolled and shipped from Ghana directly to you.</div>
+          <ul class="format-features">
+            <li>Ships worldwide from Accra, Ghana</li>
+            <li>Carefully rolled in protective tube</li>
+            <li>Certificate of authenticity included</li>
+            <li>5–10 business days delivery</li>
+            <li>Tracking number provided</li>
+          </ul>
+          <div class="format-price">
+            <div class="format-price-from">Starting from</div>
+            <div class="format-price-num">$25</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-text">
+          <h2>Also Find Us on Etsy</h2>
+          <p>Browse the full collection on our Etsy storefront — trusted worldwide checkout included.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="https://etsy.com" target="_blank" class="btn-dark">Visit Etsy Shop →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">GH Movie Posters</div>
+          <p class="footer-brand-desc">Authentic hand-painted Ghanaian cinema art — connecting the world to Ghana's living folk art tradition since 2025.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Shop</div>
+          <ul class="footer-links">
+            <li><a href="#shop">All Posters</a></li>
+            <li><a href="#formats">Digital Downloads</a></li>
+            <li><a href="#formats">Physical Prints</a></li>
+            <li><a href="#">New Arrivals</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Info</div>
+          <ul class="footer-links">
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="mailto:hello@ghmoviewposters.com">Email Us</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 GH Movie Posters. All rights reserved.</span>
+        <span class="footer-powered">Powered by <a href="#">Demarsive Media</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART OVERLAY -->
+  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <span class="cart-title">Your Cart</span>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items-list">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🎨</div>
+        <p>Your cart is empty.<br>Add a poster to get started.</p>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-price" id="cart-total">$0.00</span>
+      </div>
+      <button class="btn-primary" style="width:100%;text-align:center;" onclick="checkout()">Proceed to Checkout</button>
+      <p class="checkout-note">Secure checkout via PayPal or Card</p>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">Added to cart!</div>
+
+  <script>
+    const SUPABASE_URL = 'https://hxaqxuwqjgqlfhmfjiah.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4YXF4dXdxamdxbGZobWZqaWFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NjIzNzksImV4cCI6MjA5ODMzODM3OX0.IbIQksaHm_QBd8cLLo3aRZdd-i9eTbyenT_5NA3jKi0';
+    const COLORS = ["#3d1a0a","#0d1f0d","#1a1208","#0d0d1f","#1f0d0d","#1a0d1a"];
+
+    let products = [], cart = [], currentFilter = 'all';
+
+    async function fetchProducts() {
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&active=eq.true&order=created_at.asc`, {
+          headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` }
+        });
+        if (!res.ok) return [];
+        return await res.json();
+      } catch(e) { return []; }
+    }
+
+    function renderProducts(filter) {
+      const grid = document.getElementById('product-grid');
+      const filtered = filter === 'all' ? products : products.filter(p => p.type === filter || p.type === 'both');
+      if (!filtered.length) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:4rem;color:var(--text-dim)"><div style="font-size:3rem;opacity:0.3;margin-bottom:1rem">🎨</div><p>No products yet. Check back soon!</p></div>';
+        return;
+      }
+      grid.innerHTML = filtered.map((p, i) => `
+        <div class="product-card" data-type="${p.type}">
+          <div class="product-img-wrap">
+            ${p.image_url ? `<img src="${p.image_url}" alt="${p.name}" />` : `<div class="product-img-placeholder" style="background:linear-gradient(160deg,${COLORS[i%6]},${COLORS[i%6]}44)">${p.name.toUpperCase()}</div>`}
+            <div class="product-overlay">
+              ${p.type !== 'digital' ? `<button class="overlay-btn" onclick="addToCart('${p.id}','physical')">Physical — $${p.physical_price}</button>` : ''}
+              ${p.type !== 'physical' ? `<button class="overlay-btn secondary" onclick="addToCart('${p.id}','digital')">Digital — $${p.digital_price}</button>` : ''}
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-badge ${p.type === 'digital' ? 'badge-digital' : p.type === 'physical' ? 'badge-physical' : 'badge-both'}">${p.type === 'both' ? 'Digital + Physical' : p.type}</span>
+            <div class="product-name">${p.name}</div>
+            <div class="product-origin">${p.origin || ''}</div>
+            <div class="product-price-row">
+              <div>
+                <span class="product-price">$${p.type === 'digital' ? p.digital_price : p.physical_price}</span>
+                ${p.type === 'both' ? `<span class="product-price-digital">Digital from $${p.digital_price}</span>` : ''}
+              </div>
+              <button class="add-btn" onclick="addToCart('${p.id}','${p.type === 'digital' ? 'digital' : 'physical'}')">+</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterProducts(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      renderProducts(filter);
+    }
+
+    function addToCart(id, format) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+      const price = format === 'digital' ? product.digital_price : product.physical_price;
+      const existing = cart.find(i => i.id === id && i.format === format);
+      if (existing) { existing.qty++; }
+      else { cart.push({ id, name: product.name, price, format, image: product.image_url || '', qty: 1 }); }
+      updateCart();
+      showToast(`${product.name} added!`);
+    }
+
+    function removeFromCart(id, format) {
+      cart = cart.filter(i => !(i.id === id && i.format === format));
+      updateCart();
+    }
+
+    function updateCart() {
+      const count = cart.reduce((s, i) => s + i.qty, 0);
+      document.getElementById('cart-count').textContent = count;
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+      const list = document.getElementById('cart-items-list');
+      if (!cart.length) {
+        list.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🎨</div><p>Your cart is empty.<br>Add a product to get started.</p></div>';
+      } else {
+        list.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <div class="cart-item-art" style="width:60px;height:80px;background:var(--bg3);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">
+              ${item.image ? `<img src="${item.image}" style="width:100%;height:100%;object-fit:cover"/>` : '🎨'}
+            </div>
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-type">${item.format === 'digital' ? '⬇️ Digital' : '📦 Physical'} × ${item.qty}</div>
+              <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+            </div>
+            <button class="cart-item-remove" onclick="removeFromCart('${item.id}','${item.format}')">✕</button>
+          </div>`).join('');
+      }
+    }
+
+    function toggleCart() {
+      document.getElementById('cart-overlay').classList.toggle('open');
+      document.getElementById('cart-sidebar').classList.toggle('open');
+    }
+
+    function checkout() {
+      if (!cart.length) { showToast('Your cart is empty!'); return; }
+      showToast('Checkout coming soon — PayPal integration next!');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    function renderHeroGrid() {
+      const grid = document.getElementById('hero-grid');
+      if (!grid) return;
+      let html = '';
+      for (let i = 0; i < 6; i++) {
+        const p = products[i];
+        if (p && p.image_url) {
+          html += `<div class="poster-cell"><img src="${p.image_url}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;opacity:0.7"/></div>`;
+        } else {
+          html += `<div class="poster-cell" style="background:linear-gradient(160deg,${COLORS[i]},${COLORS[i]}44);display:flex;align-items:center;justify-content:center;font-size:0.55rem;color:rgba(201,144,42,0.3);text-align:center;padding:0.5rem;">${p ? p.name.toUpperCase() : 'YOUR POSTER'}</div>`;
+        }
+      }
+      grid.innerHTML = html;
+    }
+
+    // Init — load from Supabase
+    async function init() {
+      products = await fetchProducts();
+      renderProducts('all');
+      renderHeroGrid();
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GH Movie Posters — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0805; --bg2: #120f09; --bg3: #1a1510; --bg4: #221c14;
+      --gold: #c9902a; --gold-light: #e8b84b; --cream: #f2e8d5;
+      --text: #e8ddc8; --text-dim: #8a7d68; --border: rgba(201,144,42,0.2);
+      --red: #e74c3c; --green: #2ecc71;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; min-height: 100vh; }
+
+    /* ── LOGIN ── */
+    #login-screen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(ellipse at center, #1a1208 0%, #0a0805 70%);
+    }
+    .login-box {
+      background: var(--bg2); border: 1px solid var(--border); padding: 3rem 2.5rem;
+      width: 100%; max-width: 380px; text-align: center;
+    }
+    .login-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--gold-light); letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+    .login-sub { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem; }
+    .login-box input {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; padding: 0.8rem 1rem;
+      margin-bottom: 0.8rem; outline: none; transition: border-color 0.3s;
+    }
+    .login-box input:focus { border-color: var(--gold); }
+    .login-btn {
+      width: 100%; background: var(--gold); color: #0a0805; font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.85rem; border: none; cursor: pointer; transition: background 0.3s; margin-top: 0.4rem;
+    }
+    .login-btn:hover { background: var(--gold-light); }
+    .login-error { font-size: 0.78rem; color: var(--red); margin-top: 0.8rem; display: none; }
+
+    /* ── ADMIN LAYOUT ── */
+    #admin-screen { display: none; min-height: 100vh; }
+    .admin-topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--bg2); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 60px;
+    }
+    .admin-topbar-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--gold-light); letter-spacing: 0.1em; }
+    .admin-topbar-logo span { color: var(--text-dim); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; margin-left: 0.8rem; }
+    .topbar-actions { display: flex; align-items: center; gap: 1rem; }
+    .view-site-btn {
+      background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+      font-family: 'DM Sans', sans-serif; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.4rem 1rem; cursor: pointer; text-decoration: none; transition: all 0.2s;
+    }
+    .view-site-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .logout-btn {
+      background: transparent; border: none; color: var(--text-dim);
+      font-family: 'DM Sans', sans-serif; font-size: 0.75rem; cursor: pointer; transition: color 0.2s;
+    }
+    .logout-btn:hover { color: var(--red); }
+
+    .admin-body { display: flex; padding-top: 60px; min-height: 100vh; }
+
+    /* ── SIDEBAR ── */
+    .admin-sidebar {
+      width: 220px; flex-shrink: 0; background: var(--bg2); border-right: 1px solid var(--border);
+      padding: 2rem 0; position: fixed; top: 60px; left: 0; bottom: 0; overflow-y: auto;
+    }
+    .sidebar-section { padding: 0 1.2rem; margin-bottom: 2rem; }
+    .sidebar-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.6rem; padding: 0 0.5rem; }
+    .sidebar-link {
+      display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0.8rem;
+      font-size: 0.82rem; color: var(--text-dim); text-decoration: none; cursor: pointer;
+      border-radius: 2px; transition: all 0.2s; border: none; background: none; width: 100%; text-align: left;
+    }
+    .sidebar-link:hover { color: var(--text); background: var(--bg3); }
+    .sidebar-link.active { color: var(--gold-light); background: rgba(201,144,42,0.1); border-left: 2px solid var(--gold); }
+    .sidebar-link .icon { font-size: 1rem; width: 1.2rem; text-align: center; }
+
+    /* ── MAIN CONTENT ── */
+    .admin-main { margin-left: 220px; flex: 1; padding: 2rem; }
+
+    /* ── PANELS ── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .panel-header { margin-bottom: 2rem; }
+    .panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--cream); letter-spacing: 0.05em; }
+    .panel-sub { font-size: 0.82rem; color: var(--text-dim); margin-top: 0.3rem; }
+
+    /* ── STATS ROW ── */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-bottom: 2rem; }
+    .stat-card { background: var(--bg2); padding: 1.5rem; border: 1px solid var(--border); }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--gold-light); line-height: 1; }
+    .stat-label { font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem; }
+
+    /* ── PRODUCTS TABLE ── */
+    .section-card { background: var(--bg2); border: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .section-card-header {
+      padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .section-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--cream); letter-spacing: 0.05em; }
+    .add-product-btn {
+      background: var(--gold); color: #0a0805; font-family: 'DM Sans', sans-serif; font-size: 0.75rem;
+      font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.5rem 1.2rem;
+      border: none; cursor: pointer; transition: background 0.2s;
+    }
+    .add-product-btn:hover { background: var(--gold-light); }
+    .products-list { padding: 0; }
+    .product-row {
+      display: grid; grid-template-columns: 70px 1fr auto auto auto 80px;
+      gap: 1rem; align-items: center; padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border); transition: background 0.2s;
+    }
+    .product-row:last-child { border-bottom: none; }
+    .product-row:hover { background: var(--bg3); }
+    .product-thumb {
+      width: 70px; height: 95px; background: var(--bg3); overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.55rem; color: var(--text-dim); text-align: center;
+    }
+    .product-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .product-row-name { font-size: 0.9rem; color: var(--cream); margin-bottom: 0.2rem; }
+    .product-row-origin { font-size: 0.72rem; color: var(--text-dim); }
+    .product-row-type {
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; background: rgba(201,144,42,0.15); color: var(--gold);
+    }
+    .product-row-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--gold-light); white-space: nowrap; }
+    .product-row-actions { display: flex; gap: 0.5rem; }
+    .row-btn {
+      background: var(--bg3); border: 1px solid var(--border); color: var(--text-dim);
+      font-family: 'DM Sans', sans-serif; font-size: 0.72rem; padding: 0.35rem 0.7rem;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .row-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .row-btn.danger:hover { border-color: var(--red); color: var(--red); }
+    .empty-products { padding: 3rem; text-align: center; color: var(--text-dim); }
+    .empty-products-icon { font-size: 2.5rem; opacity: 0.3; margin-bottom: 0.8rem; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 500;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--bg2); border: 1px solid var(--border); width: 100%; max-width: 540px;
+      max-height: 90vh; overflow-y: auto; transform: translateY(20px); transition: transform 0.3s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-header {
+      padding: 1.5rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: var(--bg2); z-index: 1;
+    }
+    .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--cream); letter-spacing: 0.05em; }
+    .modal-close { background: none; border: none; color: var(--text-dim); font-size: 1.2rem; cursor: pointer; }
+    .modal-body { padding: 1.5rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 0.4rem; }
+    .form-input {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; padding: 0.7rem 1rem; outline: none; transition: border-color 0.3s;
+    }
+    .form-input:focus { border-color: var(--gold); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-select {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; padding: 0.7rem 1rem; outline: none; cursor: pointer;
+    }
+    .form-select:focus { border-color: var(--gold); }
+
+    /* Image upload */
+    .img-upload-area {
+      border: 2px dashed var(--border); padding: 1.5rem; text-align: center; cursor: pointer;
+      transition: border-color 0.3s; position: relative;
+    }
+    .img-upload-area:hover { border-color: var(--gold); }
+    .img-upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .img-preview { width: 100%; max-height: 200px; object-fit: cover; display: none; margin-top: 0.8rem; }
+    .img-upload-icon { font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.4; }
+    .img-upload-text { font-size: 0.8rem; color: var(--text-dim); }
+
+    .modal-footer {
+      padding: 1.2rem 1.5rem; border-top: 1px solid var(--border);
+      display: flex; gap: 0.8rem; justify-content: flex-end; position: sticky; bottom: 0; background: var(--bg2);
+    }
+    .btn-save {
+      background: var(--gold); color: #0a0805; font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.7rem 1.8rem; border: none; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-save:hover { background: var(--gold-light); }
+    .btn-cancel {
+      background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; padding: 0.7rem 1.5rem; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-cancel:hover { border-color: var(--gold); color: var(--text); }
+
+    /* ── SETTINGS PANEL ── */
+    .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .settings-card { background: var(--bg2); border: 1px solid var(--border); padding: 1.5rem; }
+    .settings-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--cream); letter-spacing: 0.05em; margin-bottom: 1.2rem; }
+
+    /* ── TOAST ── */
+    .admin-toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--green); color: #0a0805;
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500;
+      padding: 0.8rem 1.5rem; z-index: 600; transform: translateY(4rem);
+      transition: transform 0.3s; pointer-events: none;
+    }
+    .admin-toast.show { transform: translateY(0); }
+    .admin-toast.error { background: var(--red); color: #fff; }
+
+    @media (max-width: 768px) {
+      .admin-sidebar { display: none; }
+      .admin-main { margin-left: 0; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .product-row { grid-template-columns: 50px 1fr auto; }
+      .product-row-type, .product-row-price { display: none; }
+      .settings-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">GH Movie Posters</div>
+    <div class="login-sub">Admin Panel</div>
+    <input type="text" id="login-user" placeholder="Username" autocomplete="username" />
+    <input type="password" id="login-pass" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" />
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <div class="login-error" id="login-error">Incorrect username or password.</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin-screen">
+  <div class="admin-topbar">
+    <div class="admin-topbar-logo">GH Movie Posters <span>Admin</span></div>
+    <div class="topbar-actions">
+      <a href="index.html" target="_blank" class="view-site-btn">View Site ↗</a>
+      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="admin-body">
+    <div class="admin-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Main</div>
+        <button class="sidebar-link active" onclick="showPanel('dashboard',this)"><span class="icon">📊</span> Dashboard</button>
+        <button class="sidebar-link" onclick="showPanel('products',this)"><span class="icon">🎨</span> Posters</button>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Store</div>
+        <button class="sidebar-link" onclick="showPanel('settings',this)"><span class="icon">⚙️</span> Settings</button>
+      </div>
+    </div>
+
+    <div class="admin-main">
+
+      <!-- DASHBOARD -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="panel-header">
+          <div class="panel-title">Dashboard</div>
+          <div class="panel-sub">Welcome back. Here's your store at a glance.</div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Total Posters</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-digital">0</div><div class="stat-label">Digital Only</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-physical">0</div><div class="stat-label">Physical Only</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-both">0</div><div class="stat-label">Digital + Physical</div></div>
+        </div>
+        <div class="section-card">
+          <div class="section-card-header">
+            <div class="section-card-title">Recent Posters</div>
+            <button class="add-product-btn" onclick="showPanel('products', document.querySelector('[onclick*=products]'));openAddModal()">+ Add Poster</button>
+          </div>
+          <div id="dashboard-recent"></div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="panel" id="panel-products">
+        <div class="panel-header">
+          <div class="panel-title">Manage Posters</div>
+          <div class="panel-sub">Add, edit, or remove posters from your storefront.</div>
+        </div>
+        <div class="section-card">
+          <div class="section-card-header">
+            <div class="section-card-title">All Posters (<span id="products-count">0</span>)</div>
+            <button class="add-product-btn" onclick="openAddModal()">+ Add New Poster</button>
+          </div>
+          <div class="products-list" id="products-list"></div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="panel" id="panel-settings">
+        <div class="panel-header">
+          <div class="panel-title">Store Settings</div>
+          <div class="panel-sub">Manage your store details and contact information.</div>
+        </div>
+        <div class="settings-grid">
+          <div class="settings-card">
+            <div class="settings-card-title">Contact Details</div>
+            <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="s-email" type="email" placeholder="hello@ghmoviewposters.com" /></div>
+            <div class="form-group"><label class="form-label">WhatsApp Number</label><input class="form-input" id="s-whatsapp" type="text" placeholder="233XXXXXXXXX" /></div>
+            <div class="form-group"><label class="form-label">Instagram Handle</label><input class="form-input" id="s-ig" type="text" placeholder="@ghmoviewposters" /></div>
+            <div class="form-group"><label class="form-label">TikTok Handle</label><input class="form-input" id="s-tiktok" type="text" placeholder="@ghmoviewposters" /></div>
+            <button class="btn-save" onclick="saveSettings()">Save Settings</button>
+          </div>
+          <div class="settings-card">
+            <div class="settings-card-title">Etsy Shop Link</div>
+            <div class="form-group"><label class="form-label">Etsy Shop URL</label><input class="form-input" id="s-etsy" type="text" placeholder="https://etsy.com/shop/GHMoviePosters" /></div>
+            <button class="btn-save" onclick="saveSettings()">Save</button>
+
+            <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+              <div class="settings-card-title">Admin Password</div>
+              <div class="form-group"><label class="form-label">New Password</label><input class="form-input" id="s-newpass" type="password" placeholder="Enter new password" /></div>
+              <div class="form-group"><label class="form-label">Confirm Password</label><input class="form-input" id="s-confirmpass" type="password" placeholder="Confirm new password" /></div>
+              <button class="btn-save" onclick="changePassword()">Change Password</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-main -->
+  </div><!-- /admin-body -->
+</div><!-- /admin-screen -->
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title">Add New Poster</span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="edit-id" value="" />
+
+      <div class="form-group">
+        <label class="form-label">Poster Name *</label>
+        <input class="form-input" id="f-name" type="text" placeholder="e.g. Alien — Ghana Edition" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Origin / Location</label>
+        <input class="form-input" id="f-origin" type="text" placeholder="e.g. Accra, Ghana · 1980s" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Format Type *</label>
+        <select class="form-select" id="f-type" onchange="togglePriceFields()">
+          <option value="both">Digital + Physical</option>
+          <option value="digital">Digital Only</option>
+          <option value="physical">Physical Only</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group" id="fg-physical">
+          <label class="form-label">Physical Price (USD) *</label>
+          <input class="form-input" id="f-physical-price" type="number" min="1" placeholder="35" />
+        </div>
+        <div class="form-group" id="fg-digital">
+          <label class="form-label">Digital Price (USD) *</label>
+          <input class="form-input" id="f-digital-price" type="number" min="1" placeholder="8" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Poster Image</label>
+        <div class="img-upload-area" id="upload-area">
+          <input type="file" id="f-image" accept="image/*" onchange="handleImageUpload(event)" />
+          <div class="img-upload-icon">🖼️</div>
+          <div class="img-upload-text">Click to upload image<br><small style="opacity:0.6">JPG, PNG, WebP — max 5MB</small></div>
+        </div>
+        <img id="img-preview" class="img-preview" alt="Preview" />
+        <input type="hidden" id="f-image-data" value="" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="savePoster()">Save Poster</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-toast" id="admin-toast"></div>
+
+<script>
+  // ── SUPABASE CONFIG ──
+  const SUPABASE_URL = 'https://hxaqxuwqjgqlfhmfjiah.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4YXF4dXdxamdxbGZobWZqaWFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NjIzNzksImV4cCI6MjA5ODMzODM3OX0.IbIQksaHm_QBd8cLLo3aRZdd-i9eTbyenT_5NA3jKi0';
+
+  async function sbFetch(path, options = {}) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+      headers: {
+        'apikey': SUPABASE_ANON,
+        'Authorization': `Bearer ${SUPABASE_ANON}`,
+        'Content-Type': 'application/json',
+        'Prefer': options.prefer || 'return=representation',
+        ...options.headers
+      },
+      ...options
+    });
+    if (!res.ok) { const e = await res.text(); throw new Error(e); }
+    const text = await res.text();
+    return text ? JSON.parse(text) : [];
+  }
+
+  // ── AUTH ──
+  const ADMIN_USER = 'admin';
+  const DEFAULT_PASS = 'ghmp2025';
+  function getPass() { return localStorage.getItem('ghmp_admin_pass') || DEFAULT_PASS; }
+
+  function doLogin() {
+    const u = document.getElementById('login-user').value.trim();
+    const p = document.getElementById('login-pass').value;
+    if (u === ADMIN_USER && p === getPass()) {
+      localStorage.setItem('ghmp_admin_auth', '1');
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-screen').style.display = 'block';
+      loadAll();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+    }
+  }
+
+  function doLogout() {
+    localStorage.removeItem('ghmp_admin_auth');
+    location.reload();
+  }
+
+  function checkAuth() {
+    if (localStorage.getItem('ghmp_admin_auth') === '1') {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-screen').style.display = 'block';
+      loadAll();
+    }
+  }
+
+  // ── PANELS ──
+  function showPanel(name, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    if (btn) btn.classList.add('active');
+    if (name === 'products') renderProductsList();
+    if (name === 'dashboard') renderDashboard();
+    if (name === 'settings') loadSettings();
+  }
+
+  // ── DASHBOARD ──
+  async function renderDashboard() {
+    try {
+      const products = await sbFetch('products?select=*&active=eq.true&order=created_at.desc');
+      document.getElementById('stat-total').textContent = products.length;
+      document.getElementById('stat-digital').textContent = products.filter(p => p.type === 'digital').length;
+      document.getElementById('stat-physical').textContent = products.filter(p => p.type === 'physical').length;
+      document.getElementById('stat-both').textContent = products.filter(p => p.type === 'both').length;
+      const recent = products.slice(0, 4);
+      const el = document.getElementById('dashboard-recent');
+      if (!recent.length) {
+        el.innerHTML = '<div class="empty-products"><div class="empty-products-icon">🎨</div><p>No products yet. Add your first one!</p></div>';
+        return;
+      }
+      el.innerHTML = recent.map(p => productRowHTML(p)).join('');
+    } catch(e) { showToast('Error loading dashboard: ' + e.message, true); }
+  }
+
+  // ── PRODUCTS LIST ──
+  async function renderProductsList() {
+    const el = document.getElementById('products-list');
+    el.innerHTML = '<div class="empty-products"><p>Loading...</p></div>';
+    try {
+      const products = await sbFetch('products?select=*&order=created_at.desc');
+      document.getElementById('products-count').textContent = products.length;
+      if (!products.length) {
+        el.innerHTML = '<div class="empty-products"><div class="empty-products-icon">🎨</div><p>No products yet. Add your first one!</p></div>';
+        return;
+      }
+      el.innerHTML = products.map(p => productRowHTML(p)).join('');
+    } catch(e) { el.innerHTML = '<div class="empty-products"><p>Error loading products.</p></div>'; showToast('Error: ' + e.message, true); }
+  }
+
+  function productRowHTML(p) {
+    const price = p.type === 'digital' ? `$${p.digital_price}` : p.type === 'physical' ? `$${p.physical_price}` : `$${p.physical_price} / $${p.digital_price}`;
+    return `
+      <div class="product-row">
+        <div class="product-thumb">${p.image_url ? `<img src="${p.image_url}" alt="${p.name}" />` : '🎨'}</div>
+        <div>
+          <div class="product-row-name">${p.name}</div>
+          <div class="product-row-origin">${p.origin || ''}</div>
+        </div>
+        <div class="product-row-type">${p.type === 'both' ? 'Both' : p.type}</div>
+        <div class="product-row-price">${price}</div>
+        <div class="product-row-actions">
+          <button class="row-btn" onclick="openEditModal('${p.id}')">Edit</button>
+          <button class="row-btn danger" onclick="deletePoster('${p.id}')">Delete</button>
+        </div>
+      </div>`;
+  }
+
+  // ── MODAL ──
+  let currentImageData = '';
+
+  function openAddModal() {
+    document.getElementById('modal-title').textContent = 'Add New Product';
+    document.getElementById('edit-id').value = '';
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-origin').value = '';
+    document.getElementById('f-type').value = 'both';
+    document.getElementById('f-physical-price').value = '';
+    document.getElementById('f-digital-price').value = '';
+    document.getElementById('f-image-data').value = '';
+    document.getElementById('img-preview').style.display = 'none';
+    document.getElementById('img-preview').src = '';
+    currentImageData = '';
+    togglePriceFields();
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+
+  async function openEditModal(id) {
+    try {
+      const rows = await sbFetch(`products?id=eq.${id}&select=*`);
+      const p = rows[0];
+      if (!p) return;
+      document.getElementById('modal-title').textContent = 'Edit Product';
+      document.getElementById('edit-id').value = p.id;
+      document.getElementById('f-name').value = p.name;
+      document.getElementById('f-origin').value = p.origin || '';
+      document.getElementById('f-type').value = p.type;
+      document.getElementById('f-physical-price').value = p.physical_price || '';
+      document.getElementById('f-digital-price').value = p.digital_price || '';
+      currentImageData = p.image_url || '';
+      if (p.image_url) {
+        document.getElementById('img-preview').src = p.image_url;
+        document.getElementById('img-preview').style.display = 'block';
+      } else {
+        document.getElementById('img-preview').style.display = 'none';
+      }
+      document.getElementById('f-image-data').value = p.image_url || '';
+      togglePriceFields();
+      document.getElementById('modal-overlay').classList.add('open');
+    } catch(e) { showToast('Error loading product: ' + e.message, true); }
+  }
+
+  function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+
+  function togglePriceFields() {
+    const type = document.getElementById('f-type').value;
+    document.getElementById('fg-physical').style.opacity = type === 'digital' ? '0.3' : '1';
+    document.getElementById('fg-digital').style.opacity = type === 'physical' ? '0.3' : '1';
+  }
+
+  function handleImageUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { showToast('Image too large. Max 5MB.', true); return; }
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      currentImageData = ev.target.result;
+      document.getElementById('f-image-data').value = currentImageData;
+      const preview = document.getElementById('img-preview');
+      preview.src = currentImageData;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  async function savePoster() {
+    const name = document.getElementById('f-name').value.trim();
+    const origin = document.getElementById('f-origin').value.trim();
+    const type = document.getElementById('f-type').value;
+    const physical_price = parseFloat(document.getElementById('f-physical-price').value) || 0;
+    const digital_price = parseFloat(document.getElementById('f-digital-price').value) || 0;
+    const image_url = document.getElementById('f-image-data').value || currentImageData;
+    const editId = document.getElementById('edit-id').value;
+
+    if (!name) { showToast('Please enter a product name.', true); return; }
+    if (type !== 'digital' && !physical_price) { showToast('Please enter a physical price.', true); return; }
+    if (type !== 'physical' && !digital_price) { showToast('Please enter a digital price.', true); return; }
+
+    const payload = { name, origin, type, physical_price, digital_price, image_url, active: true };
+
+    try {
+      if (editId) {
+        await sbFetch(`products?id=eq.${editId}`, { method: 'PATCH', body: JSON.stringify(payload) });
+        showToast('Product updated!');
+      } else {
+        await sbFetch('products', { method: 'POST', body: JSON.stringify(payload) });
+        showToast('Product added!');
+      }
+      closeModal();
+      renderProductsList();
+      renderDashboard();
+    } catch(e) { showToast('Error saving: ' + e.message, true); }
+  }
+
+  async function deletePoster(id) {
+    if (!confirm('Delete this product? This cannot be undone.')) return;
+    try {
+      await sbFetch(`products?id=eq.${id}`, { method: 'DELETE', prefer: 'return=minimal' });
+      renderProductsList();
+      renderDashboard();
+      showToast('Product deleted.');
+    } catch(e) { showToast('Error deleting: ' + e.message, true); }
+  }
+
+  // ── SETTINGS ──
+  function loadSettings() {
+    const s = JSON.parse(localStorage.getItem('ghmp_settings') || '{}');
+    document.getElementById('s-email').value = s.email || '';
+    document.getElementById('s-whatsapp').value = s.whatsapp || '';
+    document.getElementById('s-ig').value = s.instagram || '';
+    document.getElementById('s-tiktok').value = s.tiktok || '';
+    document.getElementById('s-etsy').value = s.etsy || '';
+  }
+
+  function saveSettings() {
+    const s = {
+      email: document.getElementById('s-email').value.trim(),
+      whatsapp: document.getElementById('s-whatsapp').value.trim(),
+      instagram: document.getElementById('s-ig').value.trim(),
+      tiktok: document.getElementById('s-tiktok').value.trim(),
+      etsy: document.getElementById('s-etsy').value.trim(),
+    };
+    localStorage.setItem('ghmp_settings', JSON.stringify(s));
+    showToast('Settings saved!');
+  }
+
+  function changePassword() {
+    const np = document.getElementById('s-newpass').value;
+    const cp = document.getElementById('s-confirmpass').value;
+    if (!np) { showToast('Please enter a new password.', true); return; }
+    if (np !== cp) { showToast('Passwords do not match.', true); return; }
+    if (np.length < 6) { showToast('Password must be at least 6 characters.', true); return; }
+    localStorage.setItem('ghmp_admin_pass', np);
+    document.getElementById('s-newpass').value = '';
+    document.getElementById('s-confirmpass').value = '';
+    showToast('Password changed!');
+  }
+
+  // ── TOAST ──
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('admin-toast');
+    t.textContent = msg;
+    t.className = 'admin-toast' + (isError ? ' error' : '') + ' show';
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ── LOAD ALL ──
+  function loadAll() { renderDashboard(); }
+
+  document.getElementById('modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  checkAuth();
+</script>
+</body>
+</html>
